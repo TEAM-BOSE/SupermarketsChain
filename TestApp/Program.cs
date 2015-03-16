@@ -15,8 +15,27 @@
     {
         static void Main(string[] args)
         {
-            var data2 = new MsSqlContext();
+            var products = new List<Product>();
 
+            var data2 = new MsSqlContext();
+            var data = new MySqlContext();
+
+            products = data.Products.ToList();
+
+            foreach (var pr in products)
+            {
+                data.Entry<Product>(pr).State = System.Data.Entity.EntityState.Detached;
+             
+                data.Products.Add(pr);
+            }
+
+            data.SaveChanges();
+
+            var vendorss = data.Products.ToList();
+            foreach (var item in vendorss)
+            {
+                Console.WriteLine(item.Name);
+            }
 
             //data2.Products.Add(new Product()
             //{

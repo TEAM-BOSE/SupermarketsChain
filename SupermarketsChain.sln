@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.MySQL", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Config", "Config\Config.csproj", "{5E3D4F53-F934-47E2-B477-70950D8DAED2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.SQLite", "SupermarketsChain.SQLite\SupermarketsChain.SQLite.csproj", "{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +61,6 @@ Global
 		{C8877D66-06E5-4F88-900F-D30BE47E8F00} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 		{7405275D-95BF-4345-B0F5-14B45C55AEF5} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 		{5E3D4F53-F934-47E2-B477-70950D8DAED2} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
+		{874EB4B8-8A1A-4A01-898A-CD359BF5EEA9} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 	EndGlobalSection
 EndGlobal
