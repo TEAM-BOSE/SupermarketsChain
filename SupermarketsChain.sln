@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain", "SupermarketsChain\SupermarketsChain.csproj", "{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.Models", "SupermarketsChain.Models\SupermarketsChain.Models.csproj", "{0DF85435-5149-4609-B26D-A809C83432F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbContexts", "DbContexts", "{D8E3A572-D3A5-48E1-A7BA-F596B623242C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{0B22318B-A9F9-48C4-B28C-0519BB4F75EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.MsSQL", "SupermarketsChain.MsSQL\SupermarketsChain.MsSQL.csproj", "{C8877D66-06E5-4F88-900F-D30BE47E8F00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.MySQL", "SupermarketsChain.MySQL\SupermarketsChain.MySQL.csproj", "{7405275D-95BF-4345-B0F5-14B45C55AEF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Config", "Config\Config.csproj", "{5E3D4F53-F934-47E2-B477-70950D8DAED2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF85435-5149-4609-B26D-A809C83432F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF85435-5149-4609-B26D-A809C83432F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF85435-5149-4609-B26D-A809C83432F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF85435-5149-4609-B26D-A809C83432F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B22318B-A9F9-48C4-B28C-0519BB4F75EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B22318B-A9F9-48C4-B28C-0519BB4F75EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B22318B-A9F9-48C4-B28C-0519BB4F75EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B22318B-A9F9-48C4-B28C-0519BB4F75EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8877D66-06E5-4F88-900F-D30BE47E8F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8877D66-06E5-4F88-900F-D30BE47E8F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8877D66-06E5-4F88-900F-D30BE47E8F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8877D66-06E5-4F88-900F-D30BE47E8F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7405275D-95BF-4345-B0F5-14B45C55AEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7405275D-95BF-4345-B0F5-14B45C55AEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7405275D-95BF-4345-B0F5-14B45C55AEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7405275D-95BF-4345-B0F5-14B45C55AEF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3D4F53-F934-47E2-B477-70950D8DAED2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C8877D66-06E5-4F88-900F-D30BE47E8F00} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
+		{7405275D-95BF-4345-B0F5-14B45C55AEF5} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
+		{5E3D4F53-F934-47E2-B477-70950D8DAED2} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
+	EndGlobalSection
+EndGlobal
