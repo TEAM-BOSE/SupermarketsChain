@@ -13,7 +13,9 @@
         public MySqlContext()
             : base("mysqlConStr")
         {
+            //  Database.SetInitializer(new DropCreateDatabaseAlways<MySqlContext>());
         }
+
         public IDbSet<Vendor> Vendors { get; set; }
 
         public IDbSet<Measure> Measures { get; set; }
@@ -21,5 +23,10 @@
         public IDbSet<Product> Products { get; set; }
 
         public IDbSet<Expense> Expenses { get; set; }
+
+        public IDbSet<Supermarket> Supermarkets { get; set; }
+
+        public IDbSet<Income> Incomes { get; set; }
+
     }
 }

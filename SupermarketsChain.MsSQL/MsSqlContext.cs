@@ -21,5 +21,9 @@
         public IDbSet<Product> Products { get; set; }
 
         public IDbSet<Expense> Expenses { get; set; }
+
+        public IDbSet<Supermarket> Supermarkets { get; set; }
+
+        public IDbSet<Income> Incomes { get; set; }
     }
 }

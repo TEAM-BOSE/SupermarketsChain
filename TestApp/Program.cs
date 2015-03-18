@@ -24,7 +24,6 @@
             migrator.ExcuteMigration();
 
             Console.WriteLine(migrator.changes);
-
         }
     }
 }
