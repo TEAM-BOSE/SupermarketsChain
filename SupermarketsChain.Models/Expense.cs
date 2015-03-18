@@ -10,5 +10,7 @@
         public virtual Vendor Vendor { get; set; }
 
         public DateTime Date { get; set; }
+
+        public decimal Value { get; set; }
     }
 }

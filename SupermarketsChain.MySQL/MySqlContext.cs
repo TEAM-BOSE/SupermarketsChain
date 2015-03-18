@@ -6,8 +6,8 @@
     using MySql.Data.Entity;
     using Config;
 
-   [DbConfigurationType(typeof(MultipleDbConfiguration))]
-    public class MySqlContext : DbContext
+    [DbConfigurationType(typeof(MultipleDbConfiguration))]
+    public class MySqlContext : DbContext, ISupermarketDbContext
     {
 
         public MySqlContext()

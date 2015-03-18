@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8877D66-06E5-4F88-900F-D30BE47E8F00}</ProjectGuid>
+    <ProjectGuid>{130F68C6-D158-438F-A777-93A740E2CC8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SupermarketsChain.MsSQL</RootNamespace>
-    <AssemblyName>SupermarketChain.MsSQL</AssemblyName>
+    <RootNamespace>DataMigrations</RootNamespace>
+    <AssemblyName>DataMigrations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -51,13 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="MsSqlContext.cs" />
+    <Compile Include="DateBaseMigrator.cs" />
+    <Compile Include="IDateBaseMigrator.cs" />
+    <Compile Include="MigrationReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Config\Config.csproj">
@@ -68,6 +60,18 @@
       <Project>{0df85435-5149-4609-b26d-a809c83432f9}</Project>
       <Name>SupermarketsChain.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SupermarketsChain.MsSQL\SupermarketsChain.MsSQL.csproj">
+      <Project>{c8877d66-06e5-4f88-900f-d30be47e8f00}</Project>
+      <Name>SupermarketsChain.MsSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupermarketsChain.MySQL\SupermarketsChain.MySQL.csproj">
+      <Project>{7405275d-95bf-4345-b0f5-14b45c55aef5}</Project>
+      <Name>SupermarketsChain.MySQL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

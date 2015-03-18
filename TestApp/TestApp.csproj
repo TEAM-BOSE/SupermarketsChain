@@ -68,6 +68,10 @@
       <Project>{5e3d4f53-f934-47e2-b477-70950d8daed2}</Project>
       <Name>Config</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataMigrations\DataMigrations.csproj">
+      <Project>{130f68c6-d158-438f-a777-93a740e2cc8c}</Project>
+      <Name>DataMigrations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SupermarketsChain.Models\SupermarketsChain.Models.csproj">
       <Project>{0df85435-5149-4609-b26d-a809c83432f9}</Project>
       <Name>SupermarketsChain.Models</Name>

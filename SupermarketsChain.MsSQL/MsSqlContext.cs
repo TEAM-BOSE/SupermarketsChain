@@ -4,13 +4,15 @@
 
     using SupermarketsChain.Models;
     using Config;
+    using SupermarketsChain.MsSQL.Migrations;
 
     [DbConfigurationType(typeof(MultipleDbConfiguration))]
-    public class MsSqlContext : DbContext
+    public class MsSqlContext : DbContext, ISupermarketDbContext
     {
         public MsSqlContext()
             : base("mssqlConStr")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MsSqlContext, Configuration>());
         }
         public IDbSet<Vendor> Vendors { get; set; }
 
