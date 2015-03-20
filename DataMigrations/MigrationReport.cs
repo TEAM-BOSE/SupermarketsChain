@@ -1,11 +1,12 @@
-﻿namespace DataMigrations
+﻿using System;
+namespace DataMigrations
 {
-    public class MigrationReport
+    public class MigrationReport : EventArgs
     {
-        public string FromDateBase { get; set; }
-
-        public string ToDateBase { get; set; }
-
-        public int DateEntriesTransefer { get; set; }
+        public string Somestr { get; set; }
+        public MigrationReport(string str)
+        {
+            this.Somestr = str;
+        }
     }
 }

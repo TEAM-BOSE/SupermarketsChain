@@ -5,11 +5,15 @@
     using System.Linq;
     using System.Data.Entity;
     using System.Collections.Generic;
+    using System;
 
     public class DateBaseMigrator : IDateBaseMigrator
     {
+
         private ISupermarketDbContext fromDataContext;
         private ISupermarketDbContext toDataContext;
+
+        public delegate void ChangedEventHandler(object sender, EventArgs e);
         public int changes = 0;
 
         public DateBaseMigrator(ISupermarketDbContext fromDataContext, ISupermarketDbContext toDataContext)
@@ -18,14 +22,29 @@
             this.toDataContext = toDataContext;
         }
 
+        public event ChangedEventHandler Changed;
+
+        // Invoke the Changed event; called whenever list changes
+        protected virtual void OnChanged(string e)
+        {
+            if (Changed != null)
+                Changed(this, new MigrationReport(e));
+        }
+
         public void ExcuteMigration()
         {
             this.changes += this.MigrateSupermarkets();
+            OnChanged("1");
             this.changes += this.MigrateMeasures();
+            OnChanged("1");
             this.changes += this.MigrateVendors();
+            OnChanged("1");
             this.changes += this.MigrateExpenses();
+            OnChanged("1");
             this.changes += this.MigrateProducts();
+            OnChanged("1");
             this.changes += this.MigrateIncomes();
+            OnChanged("1");
         }
 
         private int MigrateMeasures()

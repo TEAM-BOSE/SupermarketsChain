@@ -84,10 +84,6 @@
       <Project>{5e3d4f53-f934-47e2-b477-70950d8daed2}</Project>
       <Name>Config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ExcelReport\ExcelReport.csproj">
-      <Project>{b945e19b-cc09-49e9-80e3-baf9be47c999}</Project>
-      <Name>ExcelReport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SupermarketsChain.Models\SupermarketsChain.Models.csproj">
       <Project>{0df85435-5149-4609-b26d-a809c83432f9}</Project>
       <Name>SupermarketsChain.Models</Name>

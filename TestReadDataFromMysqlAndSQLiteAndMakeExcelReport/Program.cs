@@ -67,7 +67,7 @@
             Console.WriteLine(mySqlContext.Expenses.Sum(x => x.Value));
             Console.WriteLine(mySqlContext.Incomes.Sum(x => x.Quantity * x.Product.Price));
 
-            ExcelReportManager.Generate(vendorsData);
+            ExcelReportManager.GenerateVendorsFinResultReport(vendorsData);
         }
     }
 }
