@@ -13,8 +13,7 @@
     using SupermarketsChain.SQLite;
     using SupermarketsChain.MySQL;
     using SupermarketsChain.MsSQL;
-    using ExcelReport;
-    using SupermarketsChain.Models.BindingModels.Reports;
+   
 
 
     class Program
@@ -26,48 +25,48 @@
             //   var mySqlContext = new MsSqlContext();
 
 
-            var TaxByVendor = new Dictionary<string, decimal>();
-            var taxes = sqliteContext.Taxes.ToList();
+            //var TaxByVendor = new Dictionary<string, decimal>();
+            //var taxes = sqliteContext.Taxes.ToList();
 
-            var vendorsByTax = mySqlContext.Vendors.Include(x => x.Products).ToList()
-               .Select(v => new
-               {
-                   Name = v.Name,
-                   Tax = v.Products
-                   .Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price
-                       * (decimal)taxes.Where(t => t.ProductId == x.Id).Select(t => t.Value).FirstOrDefault()))
-               }).ToList();
-
-
-            var vendors = mySqlContext.Vendors
-                .Select(v => new
-                {
-                    VendorName = v.Name,
-                    Incomes = v.Products.Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price)),
-                    Expense = v.Expenses.Sum(x => x.Value)
-                }).ToList();
+            //var vendorsByTax = mySqlContext.Vendors.Include(x => x.Products).ToList()
+            //   .Select(v => new
+            //   {
+            //       Name = v.Name,
+            //       Tax = v.Products
+            //       .Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price
+            //           * (decimal)taxes.Where(t => t.ProductId == x.Id).Select(t => t.Value).FirstOrDefault()))
+            //   }).ToList();
 
 
-            var vendorsData = new List<VendorsFinResultReport>();
-            foreach (var ven in vendors)
-            {
-                var tax = vendorsByTax
-                    .Where(v => v.Name == ven.VendorName)
-                    .Select(v => v.Tax).FirstOrDefault();
-                vendorsData.Add(new VendorsFinResultReport()
-                {
-                    VendorName = ven.VendorName,
-                    Expenses = ven.Expense,
-                    Incomes = ven.Incomes,
-                    Taxes = tax
-                });
+            //var vendors = mySqlContext.Vendors
+            //    .Select(v => new
+            //    {
+            //        VendorName = v.Name,
+            //        Incomes = v.Products.Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price)),
+            //        Expense = v.Expenses.Sum(x => x.Value)
+            //    }).ToList();
 
-            }
 
-            Console.WriteLine(mySqlContext.Expenses.Sum(x => x.Value));
-            Console.WriteLine(mySqlContext.Incomes.Sum(x => x.Quantity * x.Product.Price));
+            //var vendorsData = new List<VendorsFinResultReport>();
+            //foreach (var ven in vendors)
+            //{
+            //    var tax = vendorsByTax
+            //        .Where(v => v.Name == ven.VendorName)
+            //        .Select(v => v.Tax).FirstOrDefault();
+            //    vendorsData.Add(new VendorsFinResultReport()
+            //    {
+            //        VendorName = ven.VendorName,
+            //        Expenses = ven.Expense,
+            //        Incomes = ven.Incomes,
+            //        Taxes = tax
+            //    });
 
-            ExcelReportManager.GenerateVendorsFinResultReport(vendorsData);
+            //}
+
+            //Console.WriteLine(mySqlContext.Expenses.Sum(x => x.Value));
+            //Console.WriteLine(mySqlContext.Incomes.Sum(x => x.Quantity * x.Product.Price));
+
+            //ExcelReportManager.GenerateVendorsFinResultReport(vendorsData);
         }
     }
 }

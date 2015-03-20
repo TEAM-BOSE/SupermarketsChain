@@ -14,7 +14,7 @@
         private ISupermarketDbContext toDataContext;
 
         public delegate void ChangedEventHandler(object sender, EventArgs e);
-        public int changes = 0;
+        private int changes = 0;
 
         public DateBaseMigrator(ISupermarketDbContext fromDataContext, ISupermarketDbContext toDataContext)
         {
@@ -25,26 +25,40 @@
         public event ChangedEventHandler Changed;
 
         // Invoke the Changed event; called whenever list changes
-        protected virtual void OnChanged(string e)
+        protected virtual void OnChanged(string status, int rowsAdd)
         {
             if (Changed != null)
-                Changed(this, new MigrationReport(e));
+                Changed(this, new MigrationReport(status, rowsAdd));
         }
 
         public void ExcuteMigration()
         {
+            var currentChanges = 0;
             this.changes += this.MigrateSupermarkets();
-            OnChanged("1");
+            OnChanged("Supermarkets datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
             this.changes += this.MigrateMeasures();
-            OnChanged("1");
+            OnChanged("Measure datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
             this.changes += this.MigrateVendors();
-            OnChanged("1");
+            OnChanged("Vendors datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
             this.changes += this.MigrateExpenses();
-            OnChanged("1");
+            OnChanged("Expenses datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
             this.changes += this.MigrateProducts();
-            OnChanged("1");
+            OnChanged("Products datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
             this.changes += this.MigrateIncomes();
-            OnChanged("1");
+            OnChanged("Incomes datebase is transfered", this.changes - currentChanges);
+            currentChanges = this.changes;
+
+            OnChanged("Transfer is finished", this.changes);
         }
 
         private int MigrateMeasures()

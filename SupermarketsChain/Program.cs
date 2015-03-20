@@ -16,7 +16,7 @@ namespace SupermarketsChain
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SupermarketsChain());
+            Application.Run(new MainForm());
         }
     }
 }

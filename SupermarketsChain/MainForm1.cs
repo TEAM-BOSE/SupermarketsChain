@@ -14,9 +14,9 @@ using DataMigrations;
 
 namespace SupermarketsChain
 {
-    public partial class SupermarketsChain : Form
+    public partial class MainForm1 : Form
     {
-        public SupermarketsChain()
+        public MainForm1()
         {
             InitializeComponent();
         }
@@ -37,12 +37,7 @@ namespace SupermarketsChain
         private void migrator_Changed(object sender, EventArgs e)
         {
             var myevent = (MigrationReport)e;
-            MessageBox.Show(myevent.Somestr);
-        }
-
-        void migrator_Changed(object sender, MigrationReport e)
-        {
-            MessageBox.Show(e.Somestr);
+            MessageBox.Show(myevent.Status);
         }
     }
 }

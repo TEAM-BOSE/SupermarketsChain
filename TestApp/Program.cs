@@ -23,7 +23,7 @@
 
             migrator.ExcuteMigration();
 
-            Console.WriteLine(migrator.changes);
+           // Console.WriteLine(migrator.changes);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SupermarketsChain
 {
-    partial class SupermarketsChain
+    partial class MainForm1
     {
         /// <summary>
         /// Required designer variable.

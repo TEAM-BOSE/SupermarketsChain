@@ -3,10 +3,14 @@ namespace DataMigrations
 {
     public class MigrationReport : EventArgs
     {
-        public string Somestr { get; set; }
-        public MigrationReport(string str)
+        public MigrationReport(string status, int rowsAdd)
         {
-            this.Somestr = str;
+            this.Status = status;
+            this.RowsAdd = rowsAdd;
         }
+
+        public string Status { get; set; }
+
+        public int RowsAdd { get; set; }
     }
 }
