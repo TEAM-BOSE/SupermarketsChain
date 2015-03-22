@@ -111,7 +111,7 @@
             "Sales Pdf report",
             "Sales XML report",
             "Sales JSON report",
-            "Vendors Financial Result report.xlsx"});
+            "Excel Vendors Financial Result report"});
             this.reportComboBox.Location = new System.Drawing.Point(672, 194);
             this.reportComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.reportComboBox.Name = "reportComboBox";

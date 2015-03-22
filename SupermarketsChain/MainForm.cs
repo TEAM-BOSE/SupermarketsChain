@@ -21,11 +21,16 @@
 
     public partial class MainForm : Form
     {
+        private const string TransferDataMessage = "Transferring data...";
+        private const string PleaseWaitMessage = "Please wait...";
+        private const string GenerateReportMessage = "Generating report...";
+
         private MsSqlContext msSqlContext;
         private MySqlContext mySqlContext;
         private SQLiteAppContext sqliteContext;
         private BackgroundWorker worker;
         private Requester requester;
+        private SaveFileDialog saveDialog;
 
         public MainForm()
         {
@@ -37,18 +42,17 @@
             this.worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             this.monthCalendar1.MaxSelectionCount = 1;
             this.requester = new Requester(this.mySqlContext, sqliteContext);
+            this.saveDialog = new SaveFileDialog();
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.worker.DoWork -= worker_DoMigrateDateFromMsSqlToMySql;
-            this.dataTransferBtn.IsAccessible = true;
+            this.ChangeCursorAndBottonToDefault();
         }
 
         private void dataTransferBtn_Click(object sender, EventArgs e)
         {
-            this.dataTransferBtn.IsAccessible = false;
-
             switch (this.dataTransferComboBox.Text)
             {
                 case "From Oracle to MS SQL":
@@ -90,30 +94,33 @@
                 MessageBox.Show(ex.Message);
                 throw;
             }
-
         }
 
         private void MigrateDataFromMsSqlToMySql()
         {
+            this.ChangeCursorAndBottons(TransferDataMessage, PleaseWaitMessage);
+
             var migrator =
                 new DateBaseMigrator(this.msSqlContext, this.mySqlContext);
             migrator.Changed += migrator_Changed;
             migrator.ExcuteMigration();
-
         }
 
         private void migrator_Changed(object sender, EventArgs e)
         {
             var report = (MigrationReportEventArgs)e;
-            this.transferStatusRichTextBox.AppendText(
-                "Status: " + report.Status + " "
-                + "Rows added: " + report.RowsAdded + " "
-                + Environment.NewLine);
+            this.transferStatusRichTextBox.BeginInvoke(((MethodInvoker)delegate()
+            {
+                this.transferStatusRichTextBox.AppendText(
+                  "Status: " + report.Status + " "
+                  + "Rows added: " + report.RowsAdded + " "
+                  + Environment.NewLine);
+            }));
         }
 
         private void reportBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Are you sure", "Generate report", MessageBoxButtons.OKCancel);
+            string fileName = null;
 
             switch (this.reportComboBox.Text)
             {
@@ -126,18 +133,40 @@
                 case "Sales JSON report":
                     MessageBox.Show(this.reportComboBox.Text);
                     break;
-                case "Vendors Financial Result report.xlsx":
-                    this.GenerateVendorsFinReport();
+                case "Excel Vendors Financial Result report":
+                    this.saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+                    dialogResult = this.saveDialog.ShowDialog();
+
+                    if (dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        fileName = this.saveDialog.FileName;
+                        this.worker.DoWork += worker_GenerateVendorsReport;
+                        this.worker.RunWorkerAsync(fileName);
+                    }
+
                     break;
                 default: MessageBox.Show("First choose option");
                     break;
             }
         }
 
-        private void GenerateVendorsFinReport()
+        private void worker_GenerateVendorsReport(object sender, DoWorkEventArgs e)
+        {
+            this.ChangeCursorAndBottons(PleaseWaitMessage, GenerateReportMessage);
+
+            var fileName = e.Argument.ToString();
+            this.GenerateVendorsFinReport(fileName);
+
+        }
+
+        private void GenerateVendorsFinReport(string fileName)
         {
             var data = this.requester.RequestVendorsFinResultReportData();
-            ExcelReportManager.GenerateVendorsFinResultReport(data);
+            ExcelReportManager.GenerateVendorsFinResultReport(data, fileName);
         }
 
         private void getStartDateBnt_Click(object sender, EventArgs e)
@@ -148,6 +177,30 @@
         private void getEndDateBtn_Click(object sender, EventArgs e)
         {
             this.endDateTextBox.Text = this.monthCalendar1.SelectionRange.Start.ToString();
+        }
+
+        private void ChangeCursorAndBottons(string dataTransferBtnMessage, string reportBtnMessage)
+        {
+            this.reportBtn.BeginInvoke((MethodInvoker)(delegate()
+            {
+                this.reportBtn.Text = reportBtnMessage;
+                this.reportBtn.IsAccessible = false;
+            }));
+
+            this.dataTransferBtn.BeginInvoke(((MethodInvoker)delegate()
+            {
+                this.dataTransferBtn.Text = dataTransferBtnMessage;
+                this.dataTransferBtn.IsAccessible = false;
+                this.Cursor = Cursors.WaitCursor;
+            }));
+        }
+
+        private void ChangeCursorAndBottonToDefault()
+        {
+            this.reportBtn.Text = "Generate report";
+            this.dataTransferBtn.Text = "Transfer data";
+            this.Cursor = Cursors.Default;
+            this.dataTransferBtn.IsAccessible = true;
         }
     }
 }

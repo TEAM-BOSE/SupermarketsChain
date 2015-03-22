@@ -14,10 +14,11 @@
     using SupermarketsChain.Models;
     using System.Data;
     using SupermarketsChain.Models.BindingModels.Reports;
+    using System.Windows.Forms;
 
     public static class ExcelReportManager
     {
-        public static void GenerateVendorsFinResultReport(IList<VendorsFinResultReport> reportData)
+        public static void GenerateVendorsFinResultReport(IList<VendorsFinResultReport> reportData, string fileFullPath)
         {
             using (ExcelPackage p = new ExcelPackage())
             {
@@ -52,16 +53,27 @@
                 footer.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 footer.Style.Fill.BackgroundColor.SetColor(Color.Black);
 
-
-
                 //Generate A File with Random name
                 Byte[] bin = p.GetAsByteArray();
-                string file = "TaxReport.xlsx";//Guid.NewGuid().ToString() + ".xlsx";
+                string file = fileFullPath;
                 File.WriteAllBytes(file, bin);
 
                 //These lines will open it in Excel
-                ProcessStartInfo pi = new ProcessStartInfo(file);
-                Process.Start(pi);
+                //ProcessStartInfo pi = new ProcessStartInfo(file);
+                // Process.Start(pi);
+
+                //opens file's directory and select the file
+                var responseResult = MessageBox.Show("File is saved. Do you want to open file location?", "Open file location", MessageBoxButtons.OKCancel);
+
+                if (responseResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                if (File.Exists(file))
+                {
+                    Process.Start("explorer.exe", "/select, " + file);
+                }
             }
         }
     }
