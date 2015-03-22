@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain", "SupermarketsChain\SupermarketsChain.csproj", "{34C1FFCF-3D25-4CC1-A350-EC0EEC9EAA7B}"
 EndProject
@@ -22,6 +22,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.SQLite", "SupermarketsChain.SQLite\SupermarketsChain.SQLite.csproj", "{F0784192-3898-4680-BD5D-C01F39BF455A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestReadDataFromMysqlAndSQLiteAndMakeExcelReport", "TestReadDataFromMysqlAndSQLiteAndMakeExcelReport\TestReadDataFromMysqlAndSQLiteAndMakeExcelReport.csproj", "{62E04A86-02F4-4C8C-BF2C-2C051F26BF56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.DocumentExporters", "SupermarketsChain.DocumentExporters\SupermarketsChain.DocumentExporters.csproj", "{AF87C308-CF51-4A8E-8A30-71641D3C1F5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.DocumentImporters", "SupermarketsChain.DocumentImporters\SupermarketsChain.DocumentImporters.csproj", "{C41E2521-3454-47EB-AD1F-6A5DC4B0AE7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketsChain.Oracle", "SupermarketsChain.Oracle\SupermarketsChain.Oracle.csproj", "{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +71,18 @@ Global
 		{62E04A86-02F4-4C8C-BF2C-2C051F26BF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E04A86-02F4-4C8C-BF2C-2C051F26BF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E04A86-02F4-4C8C-BF2C-2C051F26BF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF87C308-CF51-4A8E-8A30-71641D3C1F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF87C308-CF51-4A8E-8A30-71641D3C1F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF87C308-CF51-4A8E-8A30-71641D3C1F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF87C308-CF51-4A8E-8A30-71641D3C1F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41E2521-3454-47EB-AD1F-6A5DC4B0AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41E2521-3454-47EB-AD1F-6A5DC4B0AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41E2521-3454-47EB-AD1F-6A5DC4B0AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41E2521-3454-47EB-AD1F-6A5DC4B0AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +92,6 @@ Global
 		{7405275D-95BF-4345-B0F5-14B45C55AEF5} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 		{5E3D4F53-F934-47E2-B477-70950D8DAED2} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 		{F0784192-3898-4680-BD5D-C01F39BF455A} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
+		{AD5E1F2F-1EA0-4ECB-A655-14F284CF957A} = {D8E3A572-D3A5-48E1-A7BA-F596B623242C}
 	EndGlobalSection
 EndGlobal
