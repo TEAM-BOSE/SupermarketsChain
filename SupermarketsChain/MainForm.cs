@@ -135,7 +135,7 @@
                     break;
                 case "Excel Vendors Financial Result report":
                     this.saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
-                    dialogResult = this.saveDialog.ShowDialog();
+                    var dialogResult = this.saveDialog.ShowDialog();
 
                     if (dialogResult == DialogResult.Cancel)
                     {
