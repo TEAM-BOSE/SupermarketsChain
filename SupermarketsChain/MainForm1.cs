@@ -36,7 +36,7 @@ namespace SupermarketsChain
 
         private void migrator_Changed(object sender, EventArgs e)
         {
-            var myevent = (MigrationReport)e;
+            var myevent = (MigrationReportEventArgs)e;
             MessageBox.Show(myevent.Status);
         }
     }

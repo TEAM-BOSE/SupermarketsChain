@@ -1,15 +1,15 @@
 ﻿namespace DataMigrations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+
     using Config;
     using SupermarketsChain.Models;
-    using System.Linq;
-    using System.Data.Entity;
-    using System.Collections.Generic;
-    using System;
 
     public class DateBaseMigrator : IDateBaseMigrator
     {
-
         private ISupermarketDbContext fromDataContext;
         private ISupermarketDbContext toDataContext;
 
@@ -28,34 +28,34 @@
         protected virtual void OnChanged(string status, int rowsAdd)
         {
             if (Changed != null)
-                Changed(this, new MigrationReport(status, rowsAdd));
+                Changed(this, new MigrationReportEventArgs(status, rowsAdd));
         }
 
         public void ExcuteMigration()
         {
             var currentChanges = 0;
             this.changes += this.MigrateSupermarkets();
-            OnChanged("Supermarkets datebase is transfered", this.changes - currentChanges);
+            OnChanged("Supermarkets database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             this.changes += this.MigrateMeasures();
-            OnChanged("Measure datebase is transfered", this.changes - currentChanges);
+            OnChanged("Measure database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             this.changes += this.MigrateVendors();
-            OnChanged("Vendors datebase is transfered", this.changes - currentChanges);
+            OnChanged("Vendors database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             this.changes += this.MigrateExpenses();
-            OnChanged("Expenses datebase is transfered", this.changes - currentChanges);
+            OnChanged("Expenses database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             this.changes += this.MigrateProducts();
-            OnChanged("Products datebase is transfered", this.changes - currentChanges);
+            OnChanged("Products database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             this.changes += this.MigrateIncomes();
-            OnChanged("Incomes datebase is transfered", this.changes - currentChanges);
+            OnChanged("Incomes database is transfered", this.changes - currentChanges);
             currentChanges = this.changes;
 
             OnChanged("Transfer is finished", this.changes);

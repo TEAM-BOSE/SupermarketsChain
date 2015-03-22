@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="DateBaseMigrator.cs" />
     <Compile Include="IDateBaseMigrator.cs" />
-    <Compile Include="MigrationReport.cs" />
+    <Compile Include="MigrationReportEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

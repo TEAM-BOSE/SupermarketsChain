@@ -4,7 +4,6 @@
 
     public interface IDateBaseMigrator
     {
-        //MigrationReport ExcuteMigration();
         void ExcuteMigration();
     }
 }

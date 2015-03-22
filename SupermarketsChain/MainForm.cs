@@ -16,13 +16,16 @@
     using SupermarketsChain.SQLite;
     using DataMigrations;
     using SupermarketsChain.Models.BindingModels.Reports;
+    using SupermarketsChain.Controllers;
+    using ExcelReport;
 
     public partial class MainForm : Form
     {
         private MsSqlContext msSqlContext;
         private MySqlContext mySqlContext;
         private SQLiteAppContext sqliteContext;
-        private BackgroundWorker mssqlToMySqlWorker;
+        private BackgroundWorker worker;
+        private Requester requester;
 
         public MainForm()
         {
@@ -30,38 +33,38 @@
             this.msSqlContext = new MsSqlContext();
             this.mySqlContext = new MySqlContext();
             this.sqliteContext = new SQLiteAppContext();
-            mssqlToMySqlWorker = new BackgroundWorker();
+            this.worker = new BackgroundWorker();
+            this.worker.RunWorkerCompleted += worker_RunWorkerCompleted;
             this.monthCalendar1.MaxSelectionCount = 1;
-            mssqlToMySqlWorker.DoWork += worker_DoMigrateDateFromMsSqlToMySql;
-            mssqlToMySqlWorker.RunWorkerCompleted += mssqlToMySqlWorker_RunWorkerCompleted;
-
+            this.requester = new Requester(this.mySqlContext, sqliteContext);
         }
 
-        private void mssqlToMySqlWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.worker.DoWork -= worker_DoMigrateDateFromMsSqlToMySql;
             this.dataTransferBtn.IsAccessible = true;
         }
 
         private void dataTransferBtn_Click(object sender, EventArgs e)
         {
-
             this.dataTransferBtn.IsAccessible = false;
 
             switch (this.dataTransferComboBox.Text)
             {
-                case "From Oracle to MsSql":
+                case "From Oracle to MS SQL":
                     MessageBox.Show(this.dataTransferComboBox.Text);
                     break;
-                case "From MsSql to MySql":
-                    this.mssqlToMySqlWorker.RunWorkerAsync();
+                case "From MS SQL to MySQL":
+                    this.worker.DoWork += worker_DoMigrateDateFromMsSqlToMySql;
+                    this.worker.RunWorkerAsync();
                     break;
-                case "From Zip to MsSql":
+                case "From Zip to MS SQL":
                     MessageBox.Show(this.dataTransferComboBox.Text);
                     break;
-                case "From XML to MsSql":
+                case "From XML to MS SQL":
                     MessageBox.Show(this.dataTransferComboBox.Text);
                     break;
-                case "From JSON Mongo":
+                case "From JSON to Mongo":
                     MessageBox.Show(this.dataTransferComboBox.Text);
                     break;
                 default: MessageBox.Show("First choose option");
@@ -71,7 +74,7 @@
 
         void worker_DoMigrateDateFromMsSqlToMySql(object sender, DoWorkEventArgs e)
         {
-            var response = MessageBox.Show("Are you sure", "Start transfer", MessageBoxButtons.OKCancel);
+            var response = MessageBox.Show("Are you sure?", "Start transfer", MessageBoxButtons.OKCancel);
 
             if (response == DialogResult.Cancel)
             {
@@ -101,16 +104,16 @@
 
         private void migrator_Changed(object sender, EventArgs e)
         {
-            var report = (MigrationReport)e;
+            var report = (MigrationReportEventArgs)e;
             this.transferStatusRichTextBox.AppendText(
                 "Status: " + report.Status + " "
-                + "Rows added: " + report.RowsAdd + " "
+                + "Rows added: " + report.RowsAdded + " "
                 + Environment.NewLine);
         }
 
         private void reportBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Are you sure", "Start transfer", MessageBoxButtons.OKCancel);
+            MessageBox.Show("Are you sure", "Generate report", MessageBoxButtons.OKCancel);
 
             switch (this.reportComboBox.Text)
             {
@@ -124,51 +127,17 @@
                     MessageBox.Show(this.reportComboBox.Text);
                     break;
                 case "Vendors Financial Result report.xlsx":
-                    this.GenerateReport();
+                    this.GenerateVendorsFinReport();
                     break;
                 default: MessageBox.Show("First choose option");
                     break;
             }
         }
 
-        private void GenerateReport()
+        private void GenerateVendorsFinReport()
         {
-            var taxes = this.sqliteContext.Taxes.ToList();
-
-            var vendorsByTax = mySqlContext.Vendors.Include(x => x.Products).ToList()
-               .Select(v => new
-               {
-                   Name = v.Name,
-                   Tax = v.Products
-                   .Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price
-                       * (decimal)taxes.Where(t => t.ProductId == x.Id).Select(t => t.Value).FirstOrDefault()))
-               }).ToList();
-
-
-            var vendors = mySqlContext.Vendors
-                .Select(v => new
-                {
-                    VendorName = v.Name,
-                    Incomes = v.Products.Sum(x => x.Incomes.Sum(y => y.Quantity * y.Product.Price)),
-                    Expense = v.Expenses.Sum(x => x.Value)
-                }).ToList();
-
-
-            var vendorsData = new List<VendorsFinResultReport>();
-            foreach (var ven in vendors)
-            {
-                var tax = vendorsByTax
-                    .Where(v => v.Name == ven.VendorName)
-                    .Select(v => v.Tax).FirstOrDefault();
-                vendorsData.Add(new VendorsFinResultReport()
-                {
-                    VendorName = ven.VendorName,
-                    Expenses = ven.Expense,
-                    Incomes = ven.Incomes,
-                    Taxes = tax
-                });
-
-            }
+            var data = this.requester.RequestVendorsFinResultReportData();
+            ExcelReportManager.GenerateVendorsFinResultReport(data);
         }
 
         private void getStartDateBnt_Click(object sender, EventArgs e)
